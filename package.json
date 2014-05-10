@@ -1,0 +1,20 @@
+{
+	"name": "fidonet-outbound-lbox",
+	"main": "fidonet-outbound-lbox.js",
+	"version": "0.0.1",
+	"description": "Fidonet Outbound BSO parser",
+	"keywords": ["Fidonet", "Fido", "Outbound", "BSO"],
+	"author": { "name": "Alexander N. Skovpen" },
+	"dependencies": {
+	},
+	"devDependencies": {
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/askovpen/node-fidonet-outbound-lbox.git"
+	},
+	"scripts": {
+		"pretest": "jshint fidonet-outbound-lbox.js test/test.js",
+		"test": "mocha --reporter spec --timeout 60s"
+	}
+}
