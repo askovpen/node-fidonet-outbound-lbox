@@ -7,7 +7,7 @@ The **Fidonet Outbound LBOX parser** module is able to read LBOX Outbound
 
 [![(npm package version)](https://nodei.co/npm/fidonet-outbound-lbox.png?downloads=true)](https://npmjs.org/package/fidonet-outbound-lbox)
 
-## Using Fidonet Squish
+## Using Fidonet Outbound LBOX parser
 
 When you `require()` the installed module, you get a constructor that uses the path to a Squish echo base as its parameter:
 
