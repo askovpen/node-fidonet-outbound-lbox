@@ -1,8 +1,8 @@
 {
 	"name": "fidonet-outbound-lbox",
 	"main": "fidonet-outbound-lbox.js",
-	"version": "0.0.1",
-	"description": "Fidonet Outbound BSO parser",
+	"version": "0.0.3",
+	"description": "Fidonet Outbound LBOX parser",
 	"keywords": ["Fidonet", "Fido", "Outbound", "BSO"],
 	"author": { "name": "Alexander N. Skovpen" },
 	"dependencies": {
