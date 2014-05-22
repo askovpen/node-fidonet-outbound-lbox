@@ -38,6 +38,6 @@ LBOX.prototype.add=function(file,addr,bundle,kknd,prio){
 		this.files[addr]=[];
 	}
 	var stat=fs.statSync(file);
-	this.files[addr].push({'file':file,'size':stat.size,'bundle':bundle,'kknd':kknd,'prio':prio});
+	this.files[addr].push({'file':file,'size':stat.size,'bundle':bundle,'kknd':kknd,'prio':prio,'type':'lbox'});
 };
 module.exports=LBOX;
