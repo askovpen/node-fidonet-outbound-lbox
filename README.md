@@ -9,18 +9,25 @@ The **Fidonet Outbound LBOX parser** module is able to read LBOX Outbound
 
 ## Using Fidonet Outbound LBOX parser
 
-When you `require()` the installed module, you get a constructor that uses the path to a Squish echo base as its parameter:
+When you `require()` the installed module, you get a constructor that uses the path to an LBOX as its parameter:
 
 ```js
 var LBOX=require('fidonet-outbound-lbox');
 var lbox=LBOX(path);
 ```
 
+The construncted object has the following method:
+
 ### read(callback)
 
-Async read LBOX
+Asynchronously reads LBOX and populates the object's `.files` property.
 
-### (object) files
+That property is also an object where each key corresponds to a Fidonet address and its value is an array of objects describing indivudual files.
 
-object with files and address
+Each object describing a file has at least the following properties:
 
+* `file` — the file's name
+
+* `size` — the file's size (in bytes)
+
+* `type` — the string `'lbox'` to identify the origin's type
