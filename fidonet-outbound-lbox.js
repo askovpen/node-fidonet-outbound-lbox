@@ -1,6 +1,7 @@
 var fs=require('fs');
 var path=require('path');
 var util=require('util');
+var async=require('async');
 
 var LBOX= function(lboxPath){
 	if (!(this instanceof LBOX)) return new LBOX(lboxPath);
@@ -11,26 +12,34 @@ var LBOX= function(lboxPath){
 };
 LBOX.prototype.read=function(callback){
 	var self=this;
-	fs.readdir(this.lboxPath, function(err,dirs){
+	fs.readdir(this.lboxPath, function(err, dirs){
 		if (err) return callback(err);
-		dirs.forEach(function(dir){
-			var stat=fs.statSync(self.lboxPath+'/'+dir);
-			if (!stat.isDirectory){return;}
-			var parts=dir.match(/(\d+)\.(\d+)\.(\d+)\.(\d+)/);
-			if (parts!==null) {
+		async.eachLimit(dirs, 1, function(dir, dirFinished){
+			fs.stat(self.lboxPath+'/'+dir, function(err, stat){
+				if (err) return dirFinished(err);
+				if (!stat.isDirectory) return dirFinished();
+			
+				var parts=dir.match(/(\d+)\.(\d+)\.(\d+)\.(\d+)/);
+				if (parts===null) return dirFinished();
 				var zone=parts[1];
 				var net=parts[2];
 				var node=parts[3];
 				var point=parts[4];
-				fs.readdirSync(self.lboxPath+'/'+dir).forEach(function(item){
-					var stat=fs.statSync(self.lboxPath+'/'+dir+'/'+item);
-					if (!stat.isFile()){return;}
-					var filename=self.lboxPath+'/'+dir+'/'+item;
-					self.add(filename,zone+':'+net+'/'+node+'.'+point,null,'^','h');
+				fs.readdir(self.lboxPath+'/'+dir, function(err, files){
+					if (err) return dirFinished(err);
+					async.eachLimit(files, 1, function(item, itemFinished){
+						fs.stat(self.lboxPath+'/'+dir+'/'+item, function(err, stat){
+							if (!stat.isFile()) return itemFinished();
+							var filename=self.lboxPath+'/'+dir+'/'+item;
+							self.add(filename,zone+':'+net+'/'+node+'.'+point,null,'^','h');
+							return itemFinished();
+						});
+					}, dirFinished);
 				});
-			}
+			});
+		}, function(err){
+			callback(null, 1);
 		});
-		callback(null,1);
 	});
 };
 LBOX.prototype.add=function(file,addr,bundle,kknd,prio){
