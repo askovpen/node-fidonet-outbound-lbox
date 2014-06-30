@@ -6,6 +6,7 @@
 	"keywords": ["Fidonet", "Fido", "Outbound", "LBOX"],
 	"author": { "name": "Alexander N. Skovpen" },
 	"dependencies": {
+		"async": "~0.9.0"
 	},
 	"devDependencies": {
 	},
