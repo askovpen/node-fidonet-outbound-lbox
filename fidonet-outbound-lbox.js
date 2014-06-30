@@ -15,7 +15,7 @@ LBOX.prototype.read=function(callback){
 	fs.readdir(this.lboxPath, function(err, dirs){
 		if (err) return callback(err);
 		async.eachLimit(dirs, 1, function(dir, dirFinished){
-			fs.stat(self.lboxPath+'/'+dir, function(err, stats){
+			fs.stat(self.lboxPath+'/'+dir, function(err, stat){
 				if (err) return dirFinished(err);
 				if (!stat.isDirectory) return dirFinished();
 			
