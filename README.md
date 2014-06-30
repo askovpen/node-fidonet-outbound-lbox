@@ -22,7 +22,7 @@ The construncted object has the following method:
 
 Asynchronously reads LBOX and populates the object's `.files` property.
 
-That property is also an object where each key corresponds to a Fidonet address and its value is an array of objects describing indivudual files.
+That property is also an object where each key corresponds to a Fidonet address and its value is an array of objects describing individual files.
 
 Each object describing a file has at least the following properties:
 
