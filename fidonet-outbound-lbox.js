@@ -12,7 +12,7 @@ var LBOX= function(lboxPath){
 LBOX.prototype.read=function(callback){
 	var self=this;
 	fs.readdir(this.lboxPath, function(err,dirs){
-		if (err) throw err;
+		if (err) return callback(err);
 		dirs.forEach(function(dir){
 			var stat=fs.statSync(self.lboxPath+'/'+dir);
 			if (!stat.isDirectory){return;}
